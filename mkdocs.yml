@@ -1,0 +1,65 @@
+site_name: Reinforcement Learning Hub
+site_description: The ultimate resource for learning Reinforcement Learning.
+site_url: https://rl-hub.achronus.dev/
+
+theme:
+  name: material
+  language: en
+  palette:
+    scheme: slate
+    primary: black
+    accent: blue
+  features:
+    - navigation.tabs
+    - navigation.indexes
+    - navigation.top
+    - navigation.path
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+  favicon: /favicon.png
+  icon:
+    logo: material/robot-excited
+    repo: fontawesome/brands/github
+
+repo_name: Achronus/rl-hub
+repo_url: https://github.com/Achronus/rl-hub
+edit_uri: edit/main/docs
+
+nav:
+  - RL Hub: index.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Achronus/rl-hub
+
+markdown_extensions:
+  - attr_list
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - tables
+  - md_in_html
+  - footnotes
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      options:
+        custom_icons:
+          - docs/assets/icons
+  - pymdownx.highlight:
+      pygments_lang_class: true
+      auto_title: true
+      linenums: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
+      title: Page Contents
+
+plugins:
+  - search

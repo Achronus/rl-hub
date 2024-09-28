@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "rl_hub"
+version = "0.1.0"
+description = "The ultimate resource to learn Reinforcement Learning."
+authors = ["Ryan Partridge <rpartridge101@gmail.com>"]
+license = "MIT License"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pydantic = "^2.9.2"
+torch = "^2.4.1"
+torchvision = "^0.19.1"
+gymnasium = "^0.29.1"
+
+
+[tool.poetry.group.docs.dependencies]
+mkdocs = "^1.6.1"
+mkdocs-material = "^9.5.38"
+
+
+[tool.poetry.group.notebook.dependencies]
+notebook = "^7.2.2"
+ipywidgets = "^8.1.5"
+matplotlib = "^3.9.2"
+seaborn = "^0.13.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
