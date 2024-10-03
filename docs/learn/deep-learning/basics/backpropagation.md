@@ -1,22 +1,44 @@
 # Backpropagation
 
-By definition, Neural Networks learn using a process called *backpropagation* where the gradient of the loss is propagated backwards through the network using the chain rule from Calculus.
+By definition, Neural Networks learn using a process called *backpropagation* where they use the Gradient Descent algorithm to pass a loss value backwards through the network using the chain rule from Calculus.
 
-That's quite a lot to digest, so let's unpack a few of it's key points - *gradient*, *loss*, and *chain rule*. 
+That's quite a lot to digest, so let's unpack a few of it's key points:
+
+1. What is *Gradient Descent*?
+2. What is a *gradient*?
+3. Why do we need *gradient*'s in the first place?
+4. What is the purpose of this *loss*?
+5. How does the *chain rule* work?
+
+Let's first start by understand *why* we need gradients.
+
+## Why Gradient's are Used
+
+The main goal of a Neural Network (NN) is to *learn patterns* or *relationships* from a set of input data in order to make predictions. This data can have one or multiple dimensions, and when we increase the number of dimensions, we increase the complexity of the data's relationships. Often, we work with multi-dimensional data and visualise it in high-dimensional space, such as Euclidean space, which is represented in three-dimensions - $(x, y, z)$. However, NNs can go beyond this and operate in spaces with hundreds of dimensions.
+
+To be able to learn, NNs utilise *weights* and *biases*. Weights determine the strength of the connection between input features and the neurons in the network, while biases allow the model to shift its activation functions, to more flexibly separate and identify the relationships between data points.
+
+To effectively make predictions, we need to minimise the difference between the network's predicted output and the actual one. We compute this difference using a *loss function*, which measures how well the model's predictions align with the true output. 
+
+In basic arithmetic, we'd normally measure the difference between two values using *subtraction*. However, because we are using multi-dimensional data, subtraction alone isn't good enough. While it gives us a static difference between two values, indicating how much one differs from the other, it doesn't tell us *how the model should adjust its parameters* (weights and biases) to improve its predictions.
+
+What we really need is a way to identify the change in *direction and magnitude* of the parameters in this high-dimensional space so we can minimize our loss. *Gradients* help us do that!
 
 ## Gradients
 
 > A gradient represents the direction and magnitude of a function's rate of change. 
 
-A gradient is either a *single* derivative or a *vector* of partial derivatives. When:
+In our case, the *loss functions* rate of change. 
 
-1. *Single-variable* function - such as $f(x)$ - gradient is a single derivative
+A gradient is either a *single* derivative or a *vector* of partial derivatives. When it's a:
+
+1. *Single-variable* function - such as $f(x)$ - the gradient is a single derivative
 
 $$
 \nabla{f(x)} = \frac{d f(x)}{dx}
 $$
 
-2. *Multi-variable* function - such as $f(x, w)$ - gradient is a vector of partial derivatives
+2. *Multi-variable* function - such as $f(x, w)$ - the gradient is a vector of partial derivatives
 
 $$
 \nabla{f(x, w)} = 
@@ -26,31 +48,20 @@ $$
 \end{bmatrix}
 $$
 
-Okay, that seems easy enough! But, what is a *derivative* and *partial derivative*, and more importantly, *why* do we need them in the first place?!
+Okay, that seems easy enough! So, how do we use this with *Gradient Descent*?
 
-Let's start with that last question first:
+## Gradient Descent
 
-> *Why* do we need derivatives in Neural Networks?
+<!-- To complete! -->
+Remember, the relationships between are data are often very complex and non-linear to better reflect the real-world.
 
+
+
+Okay, now let's go back to *gradients* and understand what *derivatives* and *partial derivatives* are.
 
 ## Derivatives
 
-> A derivative measure the *instantaneous rate of change* of a function at a given point.
-
-To start with, let's take a step back and first understand *why* we need derivatives in the first place. 
-
-This mainly boils down to two facts:
-
-1. We are working with high-dimensional data that has complex relationships.
-2. Our goal is to minimize a loss function in that high-dimensional space.
-
-Recall that our loss function quantifies the difference between the predicted outputs and the actual target values. You may wonder, if we are measuring the difference between two values, why can't we just *subtract* them?
-
-The problem is, subtraction alone only gives us a static difference between two values at a specific point in space. In other words, it tells us how much one point differs from another. It doesn't tell us *how the loss function behaves as we change the networks parameters*.
-
-What we really need is a way to identify the change in *direction and magnitude* of our parameters (weights and biases) in this high-dimensional space so that we can minimize our loss. That's where *derivatives* come in!
-
-In our case, how much a change in the parameters affects the output (prediction). This can still be a bit confusing so let's break this down with an example!
+> A derivative measures the *instantaneous rate of change* of a function at a given point.
 
 Let's say we have an arbitrary function $f(x)$ which performs the following calculation:
 
