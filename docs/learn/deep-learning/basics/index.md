@@ -1,10 +1,10 @@
 # Artificial Neural Networks
 
-So far, we've seen algorithms that perform pretty well on small tasks, but quickly become useless in the real-world problems because of the complex nature of the environment.
+So far, we've seen algorithms that perform pretty well on small tasks, but quickly become useless in real-world problems because of the complex nature of the environment.
 
-This is where Deep Learning comes into play. To start with, let's look at the most basic of networks - the *Artificial Neural Network*.
+This is where Deep Learning comes into play. To start with, let's look at the most basic of networks - the *Artificial Neural Network (ANN)*.
 
-!!! note
+??? note "More Names!"
 
     These networks have many names but all mean the samething. Here's some examples:
 
@@ -13,7 +13,7 @@ This is where Deep Learning comes into play. To start with, let's look at the mo
     - Position-Wise Neural Networks
     - Neural Networks
 
-## Artificial Neural Networks
+## Definition
 
 The most basic form of a Neural Network is an *Arificial* one. This consists of multiple neurons that are put together to create layers which can then learn complex relationships in data and generate a prediction of a new value.
 
