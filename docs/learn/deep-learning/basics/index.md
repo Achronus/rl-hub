@@ -33,12 +33,27 @@ Okay, so what are the neurons doing exactly? We'll explore that next.
 
 ## How A Neuron Works
 
-In it's simplest form, neurons are just a value between $[0, 1]$ which represents its *activation*. When $0$, the neuron is turned off, and when $1$ it is fully activated. Most of the time, neurons will have some level of activation.
+In it's simplest form, neurons are just a value between $[0, 1]$ which represents its *activation*. When $0$, the neuron is inactive (off), and when $1$ it is fully activated (extremely important for the prediction). Most of the time, neurons will have some level of activation.
 
-The network uses these *activation* values to understand how important the neuron's are for creating a new prediction. 
+<figure markdown="span">
+    ![Neuron activations](../../../assets/imgs/activations.png)
+    <figcaption>Figure 2.1. Neuron activity example (image by author)</figcaption>
+</figure>
+
+The network uses these *activation* values to understand how important the neuron's are for creating a new prediction.
+
+To get a better feel for how they work, let's consider a very high-level example. Imagine that we are performing a classification task and we want the model to be able to accurately predict whether the input is a cat or a dog.
+
+<!-- Add image -->
+<figure markdown="span">
+    ![ANN Activation Chain](../../../assets/imgs/active-chain.png)
+    <figcaption>Figure 2.2. An example of an ANN's activation chain after successfully classifiying a dog (image by author)</figcaption>
+</figure>
+
+For simplicity, let's say we've already trained our network and when we pass in a value of a dog it successfully predicts it using the activation chain shown in Figure 2.2.
 
 <!-- Update below, factually incorrect -->
-Let's consider a very high-level example. In the first layer, each neuron applies a **linear transformation** to the input as different types of linear regressions that split the data into two categories $a$ and $b$. As these neurons outputs are passed to the next layer, their regression lines become slightly more polynomial, shifting into more non-linear shapes like circles, ovals, and spheres. With more layers, this transition continues to happen so that the network can learn more complex patterns that relate to specific parts of our data.
+In the first layer, each neuron applies a **linear transformation** to the input as different types of linear regressions that split the data into two categories $a$ and $b$. As these neurons outputs are passed to the next layer, their regression lines become slightly more polynomial, shifting into more non-linear shapes like circles, ovals, and spheres. With more layers, this transition continues to happen so that the network can learn more complex patterns that relate to specific parts of our data.
 
 <!-- Add diagrams/animations -->
 
