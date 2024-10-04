@@ -7,8 +7,8 @@ theme:
   language: en
   palette:
     scheme: slate
-    primary: black
-    accent: blue
+    primary: blue
+    accent: cyan
   features:
     - navigation.tabs
     - navigation.indexes
@@ -35,8 +35,8 @@ nav:
     - Learn: learn/index.md
     - Deep Learning:
       - Deep Learning: learn/deep-learning/index.md
-      - Basics: 
-        - Basics: learn/deep-learning/basics/index.md
+      - Artificial Neural Networks: 
+        - Artificial Neural Networks: learn/deep-learning/basics/index.md
         - Backpropagation: learn/deep-learning/basics/backpropagation.md
 
 extra:
