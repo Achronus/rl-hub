@@ -143,6 +143,57 @@ This applies to *all* dimensions, and regardless of how many there are, the boun
 
 ## Perceptron
 
+### Hypothesis
+
+To confirm this hypothesis, let's consider a foundational model in statistical analysis: *linear regression*. 
+
+Bear with me here! In a simple linear regression we formulate the relationship between an input feature $x$ and a continuous output $y$. We mathematically express it as:
+
+$$
+\hat{y} = mx + b
+$$
+
+Where $m$ is the slope of the line and $b$ is where the line crosses the y-axis (y-intercept). Now, there are a few issues with this. $x$ is only *one* feature and our output value is always continuous. But, what if we were to expand on this idea? 
+
+Let's revisit what we've previously discussed:
+
+1. We need a way to create complex patterns, which requires multiple features
+2. We need our output within a range suitable for classification, such as a probability distribution $[0, 1]$
+
+For our first point, what if we added more features, like in *multiple linear regression*? That could work! We just expand our features to $x_n$, but what about the slope? That makes things a lot tricker.
+
+Now that we have multiple features, we're creating a higher dimensional space, so we need a way to understand how each input feature contributes to the model's prediction. Let's try adding a *weight* value to each feature $w_n$ based on it's importance, like so:
+
+$$
+\hat{y} = w_1 x_1 + w_2 x_2 + \cdots + w_n x_n + b
+$$
+
+Okay, this solves our first problem, but how do we change it from a continuous output to something we can use for classification? Well, as we're looking for a probability distribution, why don't we use a function to transform our output into a more suitable scale? We can try this with *logistic regression*.
+
+Common for binary classification, it uses a sigmoid function to map it's linear values into a range between $[0, 1]$. Formulated:
+
+$$
+S(z) = \frac{1}{1 + e^{-z}}
+$$
+
+Where $z$ is the linear combination of inputs that takes $x_n$ number of features, $w_n$ number of weights, and a bias term $b$ that shifts the decision boundary away from the origin $(0, 0)$ to help classify more complex features:
+
+$$
+z = w_1 x_1 + w_2 x_2 + \cdots + b = \sum^{m}_{i = 1}w_i x_i + b
+$$
+
+Notice how $z$ is identical to $\hat{y}$ in our multiple linear regression.
+
+What if I told you this is exactly what a perceptron is? It's almost too good to be true, right? Something that simple can't possibly be what drives a NN! Well it is! 😁 Or, at least the first part! Let's take a look.
+
+### Implementation
+
+<figure markdown="span">
+    ![Perceptron](../../../assets/imgs/perceptron.png)
+    <figcaption>Figure 4.1. A diagram of the perceptron process (created by author)</figcaption>
+</figure>
+
+
 
 <!-- Update below, factually incorrect -->
 In the first layer, each neuron applies a **linear transformation** to the input as different types of linear regressions that split the data into two categories $a$ and $b$. As these neurons outputs are passed to the next layer, their regression lines become slightly more polynomial, shifting into more non-linear shapes like circles, ovals, and spheres. With more layers, this transition continues to happen so that the network can learn more complex patterns that relate to specific parts of our data.
