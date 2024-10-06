@@ -197,9 +197,31 @@ What if I told you this is exactly what a perceptron is? It's almost too good to
     <figcaption>Figure 4.1. A diagram of the perceptron process (image by author)</figcaption>
 </figure>
 
+To start with, we take a vector of features $x_n$ and then multiply them by a set of weights $w_n$ (one per feature). This operation scales each feature by its respective weight value, effectively "tilting" the decision boundary. You can think of the weights as controlling the *upward* and *downward* motion of the boundary; increasing a weight pushes the boundary in the direction of the feature while decreasing it pulls it away.
 
+Next, we add a bias $b$ to the result, which shifts the boundary *left* or *right*, allowing the perceptron to move it horizontally. Both parameters (weights and biases) are crucial for optimising the decision boundary. At this point, our boundary is still a flat (linear) plane, as illustrated in Figure 3.1 (right). 
 
-<!-- Update below, factually incorrect -->
+The last step transforms it into a non-linear plane. By passing the output through an activation function $g$, we modify the shape of the decision boundary so the perceptron can capture more complex patterns. Picture this as sculpting a piece of clay; the activation function morphs the decision boundary to adapt its shape to better fit the data points.
+
+$$
+X = \begin{bmatrix}
+x_1 \\
+x_2 \\
+\vdots \\
+x_n
+\end{bmatrix} 
+\quad\quad
+W = \begin{bmatrix}
+w_1 \\
+w_2 \\
+\vdots \\
+w_n
+\end{bmatrix} \tag{3.5}
+$$
+
+$$
+\hat{y} = g(X \cdot W + b)
+$$
 In the first layer, each neuron applies a **linear transformation** to the input as different types of linear regressions that split the data into two categories $a$ and $b$. As these neurons outputs are passed to the next layer, their regression lines become slightly more polynomial, shifting into more non-linear shapes like circles, ovals, and spheres. With more layers, this transition continues to happen so that the network can learn more complex patterns that relate to specific parts of our data.
 
 <!-- Add diagrams/animations -->
