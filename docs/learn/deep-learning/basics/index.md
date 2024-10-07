@@ -197,14 +197,24 @@ What if I told you this is exactly what a perceptron is? It's almost too good to
     <figcaption>Figure 4.1. A diagram of the perceptron process (image by author)</figcaption>
 </figure>
 
-To start with, we take a vector of features $x_n$ and then multiply them by a set of weights $w_n$ (one per feature). This operation scales each feature by its respective weight value, effectively "tilting" the decision boundary. You can think of the weights as controlling the *upward* and *downward* motion of the boundary; increasing a weight pushes the boundary in the direction of the feature while decreasing it pulls it away.
+To start with, we take a vector of features $x_n$ and multiply them by a corresponding set of weights $w_n$ (one per feature). This operation scales each feature by its respective weight value, controlling the *orientation* and *slope* of the decision boundary by "tilting" it. 
 
-<!-- UPDATE ME, NEEDS THRESHOLD MENTION -->
-Next, we add a bias $b$ to the result, which shifts the boundary *left* or *right*, allowing the perceptron to move it horizontally, so it's not limited to the origin $(0, 0)$. 
+Next, we add a bias $b$ to the result, which shifts the boundary away from the origin of the data points, perpendicular to its orientation. This movement acts as a threshold for adjusting its activation status (*active* or *inactive*). If the bias is negative, it increases the threshold, meaning the perceptron needs a larger weighted sum to produce a *full-activation*. Conversely, a positive bias lowers the threshold, allowing activation with smaller weighted sums. 
 
-Both parameters (weights and biases) are crucial for optimising the decision boundary. At this point, our boundary is still a flat (linear) plane, as illustrated in Figure 3.1 (right). 
+Their effect looks different depending on the dimensionality of the data:
 
-The last step transforms it into a non-linear plane. By passing the output through an activation function $g$, we modify the shape of the decision boundary so the perceptron can capture more complex patterns. Picture this as sculpting a piece of clay; the activation function morphs the decision boundary to adapt its shape to better fit the data points. 
+- **In two dimensions**: Weights control the slope of the decision boundary (line), determining its orientation, while the bias shifts the line *left/right* or *up/down*, moving the boundary without changing its slope
+- **In three dimensions**: Weights control the tilt and orientation of the decision boundary (plane) and the bias shifts the plane in any direction (*forward/backward*, *left/right*, *up/down*)
+- **In n-dimensions (4+)**: Weights control the orientation of the decision boundary (hyperplane), and the bias shifts it perpendicularly in the multidimensional space
+
+At this point, our boundary is still a flat (linear) plane, but what we really need is a non-linear one. That's where our activation function comes in. By passing the weighted sum through an activation function $g$, we modify the shape of the decision boundary to capture more complex patterns. Picture this as sculpting a piece of clay; the activation function morphs the decision boundary to better fit the data points. 
+
+This results in a single output value $\hat{y}$. What that value is entirely depends on what type of activation function you use.
+
+<figure markdown="span">
+    ![Linear vs Non-Linear](../../../assets/imgs/lin-vs-non.jpg)
+    <figcaption>Figure 4.2. A comparsion between linear (left) and non-linear activation functions (right) outputs (image by [Alexander Amini](https://youtu.be/ErnWZxJovaM?si=r1ImQW-7EUPwPXVe&t=1464))</figcaption>
+</figure>
 
 Here's the perceptron's mathematical expression:
 
@@ -234,9 +244,10 @@ You may be wondering: "*Why do we only have a single weight per feature (column)
 
 More importantly, this would cause the perceptron to learn the unique patterns of each individual sample rather than identifying the general patterns across the feature. A single weight per feature provides a more robust way to capture the relationship between each feature and the predicted output. This also helps the model generalise more effectively to unseen data, which is exactly what we want in real-world applications.
 
-What's also interesting about the perceptron is that it only returns a single output value. What that value is entirely depends on what type of activation function you use. We'll learn more about this shortly as we start stacking multiple together.
+So, in essence, all a perceptron is doing is optimising a decision boundary using a set of parameters (weights and biases) around the input data. It's remarkable how such a simple mechanism can be so powerful, particularly when combining it with other perceptrons. Let's explore that next.
 
 ### Stacking
+
 
 
 ## Forward Pass
