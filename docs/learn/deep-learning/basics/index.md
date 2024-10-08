@@ -279,5 +279,37 @@ What we need is to somehow optimise these parameters so they can better fit our 
 
 ## Backpropagation
 
-*Note: backpropagation requires basic intuition behind differential Calculus, so this section will contain more complex looking equations. Don't panic! We will cover the parts needed to understand the equations. Our assumption here is that you only have basic arithmetic knowledge (+, -, *, /).*
+*Note: Backpropagation uses some fundamental concepts of differential calculus, so you might see a few equations that look a bit complicated. But don't panic! We'll go through everything you need to know to make sense of them. As long as you're comfortable with basic arithmetic (+, -, *, /), you'll be just fine!*
+
+You know how in the Olympics, athletes make the sport they are competing in look really easy? Behind that ease is a lot of practice and fine-tuning, and that's similar to how backpropagation works!
+
+In our case, we start by performing a forward pass to make a prediction $\hat{y}$, as we've already seen. We then feed this prediction through a loss/cost function $L$, comparing it to the actual output $y$ (the ground truth) to see how far off we are. For now, let's use Mean Squared Error (MSE) as an example:
+
+$$
+L(\hat{y}, y) = \frac{1}{n} \sum_{i=1}^{n} (\hat{y}_i - y_i)^2
+$$
+
+This function returns a *loss* value, which we then use to compute its *gradients* (the rate of change) for each parameter. These gradients measure the parameters' contribution to the error and are the fundamental piece that helps the network learn. We propagate these gradients back through the network, one neuron at a time, using them to make small adjustments to our parameters so the model can improve over time - just like how athletes refine their skills through feedback and practice!
+
+Now, there are a few things here that we need to unpack, so let's break this down into some key questions to answer:
+
+1. What is a *gradient*?
+2. Why do we need *gradients* in the first place?
+3. How do we propagate them through the network? I.e., what is the algorithm used?
+
+Let's first start by understanding *why* we need gradients.
+
+### Why Use Gradients?
+
+Recall that the main goal of an NN is to *learn patterns* or *relationships* from a set of input data in order to make predictions. As we've just discussed, we need to minimise the difference between the network's predicted output and the actual one. 
+
+Now, remember earlier that in the [Perceptron: Hypothesis](#hypothesis) section, we mentioned that perceptrons act similarly to linear regressions with slopes? Let's take a minute to go back to that idea and imagine that the network's *parameters* are actually like a hilly landscape. If we're trying to minimise our loss, then surely we'd want to find the lowest point in this landscape? This would represent our optimal set of parameters that lead to the smallest possible error.
+
+In basic arithmetic, we'd normally measure the difference between two values using *subtraction*. However, because we are in a hilly landscape, subtraction alone isn't good enough. While it tells us how much one differs from the other, it doesn't tell us the *direction* to move nor the *size* (magnitude) of our step in the landscape that reduces the error. So, we need to use something else that helps us measure the *change* of our loss between network iterations.
+
+Calculus is the mathematical study of change, so it makes perfect sense for our optimisation problem! And gradients, well, they measure the *rate of change* of a function - our loss function. 
+
+### Gradients
+
+> A gradient represents the direction and magnitude of a function's rate of change.
 
