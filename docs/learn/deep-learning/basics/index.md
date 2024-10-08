@@ -244,10 +244,40 @@ You may be wondering: "*Why do we only have a single weight per feature (column)
 
 More importantly, this would cause the perceptron to learn the unique patterns of each individual sample rather than identifying the general patterns across the feature. A single weight per feature provides a more robust way to capture the relationship between each feature and the predicted output. This also helps the model generalise more effectively to unseen data, which is exactly what we want in real-world applications.
 
-So, in essence, all a perceptron is doing is optimising a decision boundary using a set of parameters (weights and biases) around the input data. It's remarkable how such a simple mechanism can be so powerful, particularly when combining it with other perceptrons. Let's explore that next.
-
-### Stacking
-
-
+So, in essence, all a perceptron is doing is optimising a decision boundary using a set of parameters (weights and biases) around the input data. It's remarkable how such a simple mechanism can be so powerful, particularly when combining it with other perceptrons! Let's explore that next.
 
 ## Forward Pass
+
+Now that we have an understanding of a single neuron (perceptron), let's see what happens when we chain them together.
+
+Consider a small network with:
+
+- 2 hidden layers - 4 neurons each
+- 2 output nodes
+- And, Tanh activation function for all nodes - outputs bound between $[-1, 1]$
+
+We'll use [Tensorflow's Playground :material-arrow-right-bottom:](https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.001&regularizationRate=0&noise=0&networkShape=6,6,2&seed=0.34949&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false) to help with this and the diagram in Figure 4.3.
+
+Imagine our dataset is arranged in a circular pattern, where we want to split it into two distinct classes: one for the points inside the circle and another for the points forming an outer ring around it. The goal of our NN is to create a clear distinction between these two classes.
+
+<figure markdown="span">
+    ![Simple Neural Network](../../../assets/imgs/simple-nn.png)
+    <figcaption>Figure 4.3. A simple Neural Network (image by author with [TF Playground :material-arrow-right-bottom:](https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.001&regularizationRate=0&noise=0&networkShape=6,6,2&seed=0.34949&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false) elements)</figcaption>
+</figure>
+
+For this example we won't worry about the number of input features, they don't matter in this instance, so we'll set them arbitrarily to three. We'll also randomly initialise our network's parameters (weights and biases). This is crucial for each neuron to start with its own distinct pattern.
+
+Now let's take a look at the diagram (Figure 4.3). In it, each node (circle) represents a single perceptron that is densely connected with its previous layer. To keep the diagram clear, we simplify the weight connections as labelled boxes rather than individual lines. 
+
+In our first hidden layer, we can imagine our network acts as a linear classifier, creating decision boundaries similar to those shown in each node. But what's really interesting, is how they start to morph when their output is passed through multiple layers!
+
+Notice how in the second layer the decision boundaries have shifted slightly? That's because they are combining and transforming the outputs from the previous layer, learning a more complex and unique boundary! This same process repeats for the output layer, refining the boundaries even further.
+
+This process is known as the *forward pass* of the network, where the input features are propagated forward through the network, neuron by neuron, ultimately producing a prediction in the output layer. It's essential for generating network predictions and is how we perform inference on unseen data. However, if we were to use the network in its current state with only randomly initialised parameters, our predictions would be meaningless! 
+
+What we need is to somehow optimise these parameters so they can better fit our data. We achieve this through a process called *backpropagation*. We'll dive into this in the next section. See you there!
+
+## Backpropagation
+
+*Note: backpropagation requires basic intuition behind differential Calculus, so this section will contain more complex looking equations. Don't panic! We will cover the parts needed to understand the equations. Our assumption here is that you only have basic arithmetic knowledge (+, -, *, /).*
+
