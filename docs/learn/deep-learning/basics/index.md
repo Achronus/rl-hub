@@ -286,7 +286,7 @@ You know how in the Olympics, athletes make the sport they are competing in look
 In our case, we start by performing a forward pass to make a prediction $\hat{y}$, as we've already seen. We then feed this prediction through a loss/cost function $L$, comparing it to the actual output $y$ (the ground truth) to see how far off we are. For now, let's use Mean Squared Error (MSE) as an example:
 
 $$
-L(\hat{y}, y) = \frac{1}{n} \sum_{i=1}^{n} (\hat{y}_i - y_i)^2 \tag{4.1}
+L(\hat{y}, y) = \frac{1}{n} \sum_{i=1}^{n} (\hat{y}_i - y_i)^2 \tag{5.1}
 $$
 
 This function returns a *loss* value, which we then use to compute its *gradients* (the rate of change) for each parameter. These gradients measure the parameters' contribution to the error and are the fundamental piece that helps the network learn. We propagate these gradients back through the network, one neuron at a time, using them to make small adjustments to our parameters so the model can improve over time - just like how athletes refine their skills through feedback and practice!
@@ -330,7 +330,7 @@ The problem is, we have multiple parameters. A derivative only affects a single 
 We denote our gradient vector as the change $\nabla$ in our loss function $L$ with respect to each parameter $\theta$ (feature weight):
 
 $$
-\nabla{L(\theta_1, \theta_2, \cdots, \theta_n)} = [\frac{\partial{L}}{\partial{\theta_1}}, \frac{\partial{L}}{\partial{\theta_2}}, \cdots, \frac{\partial{L}}{\partial{\theta_n}}]
+\nabla{L(\theta_1, \theta_2, \cdots, \theta_n)} = [\frac{\partial{L}}{\partial{\theta_1}}, \frac{\partial{L}}{\partial{\theta_2}}, \cdots, \frac{\partial{L}}{\partial{\theta_n}}] \tag{5.2}
 $$
 
 Where $\frac{\partial{L}}{\partial{\theta_1}}$ represents the partial derivative of the loss function with respect to the first weight associated with the first feature $\theta_1$. 
