@@ -346,12 +346,12 @@ A derivative is defined as:
 > A measure of the *instantaneous rate of change* of a function at a given point.
 
 $$
-f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}
+\frac{df}{dx} = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}
 $$
 
 Where:
 
-- $f'(x)$ - is the derivative of $f(x)$ at point $x$. Also, denoted $\frac{df}{dx}$ (Leibniz's notation), indicating the rate of change of $f$ with respect to $x$
+- $\frac{df}{dx}$ - is the derivative of $f(x)$ at point $x$, indicating the rate of change of $f$ with respect to $x$
 - $h$ - is a small change in $x$. The smaller $h$ gets, the closer we get to the true slope of the function at $x$
 - $f(x + h)$ - the value of the function $f$ after $x$ has been shifted by $h$
 - $f(x)$ - the value of the function $f$ at $x$
@@ -407,10 +407,55 @@ We previously used $h = 0.1$ as a small step, but we can keep making it smaller,
 The limit allows us to define the derivative rigorously:
 
 $$
-f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}
+\frac{df}{dx} = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}
 $$
 
 To summarise, as $h$ approaches $0$, the function $f(x)$ becomes increasingly precise in representing the rate of change at that point, giving us the instantaneous slope at any given point in our hilly landscape. This ensures that, regardless of how small the step we take, we can always compute the slope with perfect precision.
 
 ### Partial Derivatives
 
+Partial derivatives extend the concept of derivatives to functions with multiple variables, such as $f(x, y)$, by applying the same principles of differentiation independently to each variable, treating the others as constants. 
+
+Instead of just examining how a function changes with one variable, we get to see how it changes with each variable while ignoring the others. It's like zooming in on one factor at a time!
+
+Okay, so why do we set the other variables to constants? Well, constants are fixed values that never change. This allows us to isolate the specific impact of each variable and helps us understand their cause-and-effect relationships. It's also more realistic to analyse how one factor affects an outcome while assuming the others remain unchanged. For example, in economics, it's unlikely that consumer income would fluctuate dramatically while the quantity supplied is adjusted. This behaviour is quite similar to how we adjust our NN weight values.
+
+Additionally, this method simplifies our coordinate space. Remember, we are working with multiple dimensions and focusing on one variable at a time is much easier to understand and handle. 
+
+From what we've seen in the previous section, we can define the partial derivatives as follows:
+
+1. The partial derivative of $f$ with respect to $x$:
+
+$$
+\frac{\partial{f}}{\partial{x}} = \lim_{h \to 0} \frac{f(x + h, y) - f(x, y)}{h}
+$$
+
+2. The partial derivative of $f$ with respect to $y$:
+
+$$
+\frac{\partial{f}}{\partial{y}} = \lim_{h \to 0} \frac{f(x, y + h) - f(x, y)}{h}
+$$
+
+Notice the change in notation here from $d$ to the partial $\partial$ symbol. For simplicity, we won't derive or calculate these equations.
+
+??? example "Example Problem"
+
+    If you are keen to try it yourself here's an example function that expands on our previous one:
+
+    $$
+    f(x, y) = -xy + 5
+    $$
+
+    Using the values $x = 3, y = 4, h = 0.001$ you should get:
+
+    $$
+    \frac{\partial{f}}{\partial{x}} \approx -4
+    $$
+
+    $$
+    \frac{\partial{f}}{\partial{y}} \approx -3
+    $$
+
+Awesome! Now we're ready to move onto the most basic backpropagation algorithm: *Gradient Descent*.
+
+### Gradient Descent
