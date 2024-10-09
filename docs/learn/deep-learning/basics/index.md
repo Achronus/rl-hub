@@ -11,7 +11,7 @@ A Neural Network (NN) is a type of Machine Learning algorithm, often called a mo
 There are many variants of NNs today, like Convolutional and Recurrent, but the one we will focus on is an *Artificial* one. It's the most basic NN and provides the foundation for any of its variants. You'll often find it called other names too, like *Feed-forward* and *Position-wise*, these all refer to the same thing.
 
 <figure markdown="span">
-    ![Artificial Neural Network](../../../assets/imgs/ann.png)
+    ![Artificial Neural Network](../../../assets/imgs/ann/ann.png)
     <figcaption>Figure 1.1. An Artificial Neural Network (ANN) with three layers (image by author)</figcaption>
 </figure>
 
@@ -35,7 +35,7 @@ In its simplest form, neurons are a value between a given range, such as $[0, 1]
 The neuron's value is known as its *activation*. The network uses these *activation* values to understand how important the neuron is for making a new prediction.
 
 <figure markdown="span">
-    ![Neuron activations](../../../assets/imgs/activations.png)
+    ![Neuron activations](../../../assets/imgs/ann/activations.png)
     <figcaption>Figure 2.1. Neuron activity example (image by author)</figcaption>
 </figure>
 
@@ -44,8 +44,8 @@ When the value is $0$, the neuron is inactive (off), and when it's at its maximu
 ### MNIST Example
 
 <figure markdown="span">
-    ![MNIST Samples](../../../assets/imgs/mnist.jpg)
-    <figcaption>Figure 2.2. Example of handwritten digits from the MNIST dataset (image by [deeplake](https://datasets.activeloop.ai/docs/ml/datasets/mnist/))</figcaption>
+    ![MNIST Samples](../../../assets/imgs/ann/mnist.jpg)
+    <figcaption>Figure 2.2. Example of handwritten digits from the MNIST dataset (image by [deeplake :material-arrow-right-bottom:](https://datasets.activeloop.ai/docs/ml/datasets/mnist/))</figcaption>
 </figure>
 
 To get a better feel for how they work, let's look at a high-level example. Imagine we're trying to classify handwritten digits from the MNIST dataset, which includes digits ranging from 0 to 9. The model's goal is to correctly identify which digit is provided when passed in through the input layer.
@@ -55,15 +55,15 @@ In our output layer, we have 10 neurons, each representing the model's predictio
 Let's say we already have a trained network, and we pass in an image of a 9. Our hope would be that each layer would correspond to a different piece of each number. Like in Figure 2.3, where the black nodes are inactive, the white is fully active, and the grey is partially active.
 
 <figure markdown="span">
-    ![NN Desired Activations](../../../assets/imgs/active-chain.jpg)
-    <figcaption>Figure 2.3. Example of desired NN activations (image by [3Blue1Brown](https://www.youtube.com/watch?v=aircAruvnKk&list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi))</figcaption>
+    ![NN Desired Activations](../../../assets/imgs/ann/active-chain.jpg)
+    <figcaption>Figure 2.3. Example of desired NN activations (image by [3Blue1Brown :material-arrow-right-bottom:](https://www.youtube.com/watch?v=aircAruvnKk&list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi))</figcaption>
 </figure>
 
 Logically, this would make sense. But unfortunately, we actually get intangible nonsense - or at least to us anyway 😅! 
 
 <figure markdown="span">
-    ![NN Activation Maps](../../../assets/imgs/active-patterns.jpg)
-    <figcaption>Figure 2.4. An example of neuron activation maps for some of the nodes in the second layer from Figure 2.3, where blue represents active focus (image by [3Blue1Brown](https://www.youtube.com/watch?v=IHZwWFHWa-w&list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&index=2))</figcaption>
+    ![NN Activation Maps](../../../assets/imgs/ann/active-patterns.jpg)
+    <figcaption>Figure 2.4. An example of neuron activation maps for some of the nodes in the second layer from Figure 2.3, where blue represents active focus (image by [3Blue1Brown :material-arrow-right-bottom:](https://www.youtube.com/watch?v=IHZwWFHWa-w&list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&index=2))</figcaption>
 </figure>
 
 You may be wondering: "*Why?*" Well, that boils down to the complexity and dimensionality of the data. In Figure 2.4, the activation maps are shown as two-dimensional plots. If they were three-dimensional, things would look a lot different. Anything beyond three-dimensional is extremely hard to visualise. NNs often operate in spaces with hundreds of dimensions, so what they "see" is vastly different to what we can even begin to comprehend. 
@@ -110,7 +110,7 @@ We define the shape of a matrix by its dimensions *(row, column)*. So, starting 
 Each *column* is one dimension of the data in the matrix, while each *row* is a separate point in high-dimensional space. We can't visualise this with four dimensions, but we can with two and three, as shown in Figure 3.1.
 
 <figure markdown="span">
-    ![2D and 3D plots](../../../assets/imgs/2d-3d-space.jpeg)
+    ![2D and 3D plots](../../../assets/imgs/ann/2d-3d-space.jpeg)
     <figcaption>Figure 3.1. Examples of a 2D (left) and 3D (right) space (image by author)</figcaption>
 </figure>
 
@@ -132,11 +132,11 @@ Then, with higher dimensions, the same behaviour would be repeated. Now, what's 
 
 ??? info "Decision Boundaries"
 
- Decision boundaries have different names depending on the dimensionality of your data. Here's a brief summary:
+    Decision boundaries have different names depending on the dimensionality of your data. Here's a brief summary:
 
- - In two dimensions, we call it a *line*
- - In three dimensions, a *plane*
- - And, in four or more ($n$-dimensions), a *hyperplane*
+    - In two dimensions, we call it a *line*
+    - In three dimensions, a *plane*
+    - And, in four or more ($n$-dimensions), a *hyperplane*
 
 
 See the blue dividers between the two categories? These are called *decision boundaries* and each neuron creates one to separate the data into type $a$ or $b$.
@@ -193,7 +193,7 @@ What if I told you this is exactly what a perceptron is? It's almost too good to
 ### Implementation
 
 <figure markdown="span">
-    ![Perceptron](../../../assets/imgs/perceptron.png)
+    ![Perceptron](../../../assets/imgs/ann/perceptron.png)
     <figcaption>Figure 4.1. A diagram of the perceptron process (image by author)</figcaption>
 </figure>
 
@@ -212,8 +212,8 @@ At this point, our boundary is still a flat (linear) plane, but what we really n
 This results in a single output value $\hat{y}$. What that value is entirely depends on what type of activation function you use.
 
 <figure markdown="span">
-    ![Linear vs Non-Linear](../../../assets/imgs/lin-vs-non.jpg)
-    <figcaption>Figure 4.2. A comparsion between linear (left) and non-linear activation functions (right) outputs (image by [Alexander Amini](https://youtu.be/ErnWZxJovaM?si=r1ImQW-7EUPwPXVe&t=1464))</figcaption>
+    ![Linear vs Non-Linear](../../../assets/imgs/ann/lin-vs-non.jpg)
+    <figcaption>Figure 4.2. A comparsion between linear (left) and non-linear activation functions (right) outputs (image by [Alexander Amini :material-arrow-right-bottom:](https://youtu.be/ErnWZxJovaM?si=r1ImQW-7EUPwPXVe&t=1464))</figcaption>
 </figure>
 
 Here's the perceptron's mathematical expression:
@@ -261,7 +261,7 @@ We'll use [Tensorflow's Playground :material-arrow-right-bottom:](https://playgr
 Imagine our dataset is arranged in a circular pattern, where we want to split it into two distinct classes: one for the points inside the circle and another for the points forming an outer ring around it. The goal of our NN is to create a clear distinction between these two classes.
 
 <figure markdown="span">
-    ![Simple Neural Network](../../../assets/imgs/simple-nn.png)
+    ![Simple Neural Network](../../../assets/imgs/ann/simple-nn.png)
     <figcaption>Figure 4.3. A simple Neural Network (image by author with [TF Playground :material-arrow-right-bottom:](https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.001&regularizationRate=0&noise=0&networkShape=6,6,2&seed=0.34949&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false) elements)</figcaption>
 </figure>
 
@@ -279,14 +279,14 @@ What we need is to somehow optimise these parameters so they can better fit our 
 
 ## Backpropagation
 
-*Note: Backpropagation uses some fundamental concepts of differential calculus, so you might see a few equations that look a bit complicated. But don't panic! We'll go through everything you need to know to make sense of them. As long as you're comfortable with basic arithmetic (+, -, *, /), you'll be just fine!*
+*Note: Backpropagation uses some fundamental concepts of differential calculus, so you might see a few equations that look a bit complicated. But don't panic! We'll go through everything you need to know to make sense of them. As long as you're comfortable with basic arithmetic (+, -, ***, /), you'll be just fine!*
 
 You know how in the Olympics, athletes make the sport they are competing in look really easy? Behind that ease is a lot of practice and fine-tuning, and that's similar to how backpropagation works!
 
 In our case, we start by performing a forward pass to make a prediction $\hat{y}$, as we've already seen. We then feed this prediction through a loss/cost function $L$, comparing it to the actual output $y$ (the ground truth) to see how far off we are. For now, let's use Mean Squared Error (MSE) as an example:
 
 $$
-L(\hat{y}, y) = \frac{1}{n} \sum_{i=1}^{n} (\hat{y}_i - y_i)^2
+L(\hat{y}, y) = \frac{1}{n} \sum_{i=1}^{n} (\hat{y}_i - y_i)^2 \tag{4.1}
 $$
 
 This function returns a *loss* value, which we then use to compute its *gradients* (the rate of change) for each parameter. These gradients measure the parameters' contribution to the error and are the fundamental piece that helps the network learn. We propagate these gradients back through the network, one neuron at a time, using them to make small adjustments to our parameters so the model can improve over time - just like how athletes refine their skills through feedback and practice!
@@ -303,13 +303,40 @@ Let's first start by understanding *why* we need gradients.
 
 Recall that the main goal of an NN is to *learn patterns* or *relationships* from a set of input data in order to make predictions. As we've just discussed, we need to minimise the difference between the network's predicted output and the actual one. 
 
-Now, remember earlier that in the [Perceptron: Hypothesis](#hypothesis) section, we mentioned that perceptrons act similarly to linear regressions with slopes? Let's take a minute to go back to that idea and imagine that the network's *parameters* are actually like a hilly landscape. If we're trying to minimise our loss, then surely we'd want to find the lowest point in this landscape? This would represent our optimal set of parameters that lead to the smallest possible error.
+Now, remember earlier that in the [Perceptron: Hypothesis](#hypothesis) section, we replaced the linear regression's slope with weights? Let's revisit that idea and imagine the network's *parameters* as slopes in a hilly landscape. If we're trying to minimise our loss, then surely we'd want to find the lowest point in this landscape, right? This would represent our optimal set of parameters that lead to the smallest possible error.
 
-In basic arithmetic, we'd normally measure the difference between two values using *subtraction*. However, because we are in a hilly landscape, subtraction alone isn't good enough. While it tells us how much one differs from the other, it doesn't tell us the *direction* to move nor the *size* (magnitude) of our step in the landscape that reduces the error. So, we need to use something else that helps us measure the *change* of our loss between network iterations.
+<figure markdown="span">
+    ![Hilly Landscape](../../../assets/imgs/ann/hilly-landscape.jpg)
+    <figcaption>Figure 5.1. Mathematical hilly landscape examples (image by [DigitalOcean :material-arrow-right-bottom:](https://www.digitalocean.com/community/tutorials/intro-to-optimization-in-deep-learning-gradient-descent))</figcaption>
+</figure>
 
-Calculus is the mathematical study of change, so it makes perfect sense for our optimisation problem! And gradients, well, they measure the *rate of change* of a function - our loss function. 
+In basic arithmetic, we'd normally measure the difference between two values using *subtraction*. However, because we are in a hilly landscape, subtraction alone isn't good enough. While it tells us how much one value differs from the other, it doesn't tell us the *direction* to move nor the *size* (magnitude) of our step in the landscape that reduces the error. So, we need to use something else that helps us measure the *change* of our loss between predictions.
 
-### Gradients
+Calculus is the mathematical *study of change*, so it's a perfect fit for our optimization problem! And gradients, well, they measure the *rate of change* of a function - our loss function - and show us the direction of the steepest increase in our landscape. To minimise the loss, we simply move in the opposite direction.
 
-> A gradient represents the direction and magnitude of a function's rate of change.
+### What is a Gradient?
 
+So, what is a gradient? It's a vector of *partial derivatives* that points in the direction of steepest ascent.
+
+Let's unpack that:
+
+1. What is a *derivative*?
+2. What is a *partial derivative*?
+
+A derivative measures the *instantaneous rate of change* of a function at a given point. In our case, this function is our loss function $L$, the point is a location in our hilly landscape (parameter space) represented by our parameters $[w_1, w_2, \cdots, w_n]$ and this instantaneous rate of change indicates how the loss would change with small adjustments to the parameters. 
+
+The problem is, we have multiple parameters. A derivative only affects a single one at a time. What we really need is to see how the loss function changes as each parameter does. But how? Hmm... What if we take the derivative for each parameter individually and ignore the others? That's exactly what a *partial derivative* does!
+
+We denote our gradient vector as the change $\nabla$ in our loss function $L$ with respect to each parameter $\theta$ (feature weight):
+
+$$
+\nabla{L(\theta_1, \theta_2, \cdots, \theta_n)} = [\frac{\partial{L}}{\partial{\theta_1}}, \frac{\partial{L}}{\partial{\theta_2}}, \cdots, \frac{\partial{L}}{\partial{\theta_n}}]
+$$
+
+Where $\frac{\partial{L}}{\partial{\theta_1}}$ represents the partial derivative of the loss function with respect to the first weight associated with the first feature $\theta_1$. 
+
+Next, we'll look at how these are computed by covering the basics of *derivatives* and *partial derivatives*. Then, we'll discuss the algorithm used in backpropagation: *Gradient Descent*.
+
+If you already know how to compute them, feel free to skip to the [Gradient Descent section](#gradient-descent)!
+
+### Derivatives
