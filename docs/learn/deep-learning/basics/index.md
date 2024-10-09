@@ -340,3 +340,77 @@ Next, we'll look at how these are computed by covering the basics of *derivative
 If you already know how to compute them, feel free to skip to the [Gradient Descent section](#gradient-descent)!
 
 ### Derivatives
+
+A derivative is defined as:
+
+> A measure of the *instantaneous rate of change* of a function at a given point.
+
+$$
+f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}
+$$
+
+Where:
+
+- $f'(x)$ - is the derivative of $f(x)$ at point $x$. Also, denoted $\frac{df}{dx}$ (Leibniz's notation), indicating the rate of change of $f$ with respect to $x$
+- $h$ - is a small change in $x$. The smaller $h$ gets, the closer we get to the true slope of the function at $x$
+- $f(x + h)$ - the value of the function $f$ after $x$ has been shifted by $h$
+- $f(x)$ - the value of the function $f$ at $x$
+- $\lim_{h \to 0}$ - the *limit* of $f$ as the value $h$ approaches $0$
+
+This might look scary at first, but all we need to do is break it down into two separate parts: the *slope* and the *limit*.
+
+Remember, our goal focuses on a hilly landscape, and we want to reach the lowest point to minimise our loss!
+
+#### Slope
+
+The *slope* tells us which direction leads downhill (to reduce our error) and how steep the hill is (how fast the error decreases). In it's simplest form (on a 2D line), we compute the change in the height $y$ over the change in width $x$:
+
+$$
+\frac{\text{change in height}}{\text{change in width}} = \frac{\Delta{y}}{\Delta{x}}
+$$
+
+The larger the slope, the steeper the line is. We can use the same premise for a function by considering how it changes between two input values, such as $f(x)$ and $f(x + h)$, where $x$ changes by $h$.
+
+For example, consider the function:
+
+$$
+f(x) = -x + 5
+$$
+
+With points on our hilly landscape, $x$ and $x + h$:
+
+1. $x = 3$
+2. $x + h = 3 + 0.1$
+
+We can now calculate the slope between these two points:
+
+$$
+\frac{f(x + h) - f(x)}{h} = \frac{f(3.1) - f(3)}{3.1 - 3}
+$$
+
+Substitute the values:
+
+$$
+\frac{(-3.1 + 5) - (-3 + 5)}{0.1} = \frac{1.9 - 2}{0.1} = \frac{-0.1}{0.1} = -1
+$$
+
+So the slope here is $-1$, indicating the line is sloping downward and we are heading downhill.
+
+#### Limit
+
+The slope we just computed is an *approximation* of the *rate of change* between two points. But what we need is to find the *true* instantaneous rate of change (the exact slope at a single point). We need to make the change in $x$ represented by $h$ as it gets smaller and smaller.
+
+The use of the *limit* helps us formalize this idea. As $h$ approaches $0$, the two points get infinitely closer together. The limit tells us the exact slope of the function at that specific point as the step size becomes vanishingly small. 
+
+We previously used $h = 0.1$ as a small step, but we can keep making it smaller, which is common during NN training. Thus, as $h \to 0$, the slope we calculate approaches the *true* slope at $x = 3$. This is crucial for non-linear functions because the slope can vary from point to point, which makes them far more complex than the linear one we've explored. 
+
+The limit allows us to define the derivative rigorously:
+
+$$
+f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}
+$$
+
+To summarise, as $h$ approaches $0$, the function $f(x)$ becomes increasingly precise in representing the rate of change at that point, giving us the instantaneous slope at any given point in our hilly landscape. This ensures that, regardless of how small the step we take, we can always compute the slope with perfect precision.
+
+### Partial Derivatives
+
