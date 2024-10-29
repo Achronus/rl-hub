@@ -5,6 +5,8 @@ import yaml
 from pydantic import BaseModel, ConfigDict, model_validator
 from pydantic_settings import BaseSettings
 
+from rl_hub.exc import IncorrectFileTypeError
+
 
 class EnvironmentConfig(BaseModel):
     NAME: str
@@ -12,7 +14,7 @@ class EnvironmentConfig(BaseModel):
     SEED: int | None = None
 
 
-class Config(BaseSettings):
+class GymEnvConfig(BaseSettings):
     ENV: EnvironmentConfig
 
     model_config = ConfigDict(extra="ignore")
@@ -33,8 +35,16 @@ class Config(BaseSettings):
         return convert_keys(values)
 
 
-def load_config(filename: Path) -> Config:
+def load_config(filename: Path | str) -> GymEnvConfig:
+    """Loads a YAML file as a GymEnvConfig pydantic model."""
+    yaml_file = filename.split(".")[-1] == "yaml"
+
+    if not yaml_file:
+        raise IncorrectFileTypeError(
+            "Incorrect file type provided. Must be a 'yaml' file."
+        )
+
     with open(filename, "r") as f:
         yaml_config = yaml.safe_load(f)
 
-    return Config(**yaml_config)
+    return GymEnvConfig(**yaml_config)

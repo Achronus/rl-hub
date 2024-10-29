@@ -1,14 +1,14 @@
 import gymnasium as gym
 from pydantic import BaseModel
 
-from rl_hub.core.config import Config
+from rl_hub.core.config import GymEnvConfig
 from rl_hub.core.enums import RenderMode
 
 
 class GymEnvHandler(BaseModel):
     """A Gym environment handler for working with [Gymnasium](https://gymnasium.farama.org/) environments."""
 
-    config: Config
+    config: GymEnvConfig
 
     @property
     def env(self) -> gym.Env:
