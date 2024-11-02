@@ -1,5 +1,6 @@
+from typing import Any
 import gymnasium as gym
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 from rl_hub.core.config import GymEnvConfig
 from rl_hub.core.enums import RenderMode
@@ -9,11 +10,16 @@ class GymEnvHandler(BaseModel):
     """A Gym environment handler for working with [Gymnasium](https://gymnasium.farama.org/) environments."""
 
     config: GymEnvConfig
+    env: gym.Env | None = None
 
-    @property
-    def env(self) -> gym.Env:
-        """A property for accessing a simple copy of the Gym environment."""
-        return gym.make(self.config.ENV.NAME)
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
+    def model_post_init(self, __context: Any) -> None:
+        self.env = (
+            gym.make(self.config.ENV.NAME, render_mode="rgb_array")
+            if self.env is None
+            else self.env
+        )
 
     def run_demo(
         self, episodes: int = 10, render_mode: RenderMode | None = RenderMode.HUMAN
