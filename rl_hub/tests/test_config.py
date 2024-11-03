@@ -4,7 +4,7 @@ from pathlib import Path
 import yaml
 
 from rl_hub.exc import IncorrectFileTypeError
-from rl_hub.core.config import GymEnvConfig, EnvironmentConfig, load_config
+from rl_hub.core.config import EnvConfig, EnvironmentSettings, load_config
 
 
 class TestGymEnvConfig:
@@ -24,8 +24,8 @@ class TestGymEnvConfig:
         config = load_config(config_file)
 
         checks = [
-            isinstance(config, GymEnvConfig),
-            isinstance(config.ENV, EnvironmentConfig),
+            isinstance(config, EnvConfig),
+            isinstance(config.ENV, EnvironmentSettings),
             config.ENV.NAME == "CartPole-v1",
             config.ENV.EPISODES == 100,
             config.ENV.SEED == 42,

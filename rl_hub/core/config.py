@@ -8,14 +8,14 @@ from pydantic_settings import BaseSettings
 from rl_hub.exc import IncorrectFileTypeError
 
 
-class EnvironmentConfig(BaseModel):
+class EnvironmentSettings(BaseModel):
     NAME: str
     EPISODES: int
     SEED: int | None = None
 
 
-class GymEnvConfig(BaseSettings):
-    ENV: EnvironmentConfig
+class EnvConfig(BaseSettings):
+    ENV: EnvironmentSettings
 
     model_config = ConfigDict(extra="ignore")
 
@@ -36,7 +36,7 @@ class GymEnvConfig(BaseSettings):
 
 
 @validate_call(validate_return=True)
-def load_config(filepath: Path | str) -> GymEnvConfig:
+def load_config(filepath: Path | str) -> EnvConfig:
     """Loads a YAML file as a GymEnvConfig pydantic model."""
     if not Path(filepath).exists():
         raise FileNotFoundError("File does not exist.")
@@ -51,4 +51,4 @@ def load_config(filepath: Path | str) -> GymEnvConfig:
     with open(filepath, "r") as f:
         yaml_config = yaml.safe_load(f)
 
-    return GymEnvConfig(**yaml_config)
+    return EnvConfig(**yaml_config)
