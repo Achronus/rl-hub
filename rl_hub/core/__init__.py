@@ -31,18 +31,29 @@ class History(BaseModel):
 
     def returns(self, gamma: float = 1) -> list[float]:
         """
-        Computes the discounted return for each trajectory. Starts at last trajectory and iterates backwards through time $t$.
+        Computes the discounted return for each trajectory. Starts at last trajectory and iterates backwards through time `t`.
 
-        For every trajectory:
-        $$
-        G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \cdots = \sum_{k=0}^{\infty} \gamma^k R_{t+k+1}
-        $$
+        The return G_t at each timestep is calculated as:
+        G_t = R_{t+1} + γR_{t+2} + γ²R_{t+3} + ... = Σ_{k=0}^∞ γᵏR_{t+k+1}
 
-        When iterating, this simplifies to use future return:
-        $$
-        G_t = R_{t} + \gamma G_{t+1}
-        $$
+        Where:
+        - G_t is the return at time t
+        - R_t is the reward at time t
+        - γ (gamma) is the discount factor
+        - k is the number of steps into the future
+
+        When iterating, this simplifies to use the future return:
+        G_t = R_{t} + γG_{t+1}
+
+        Args:
+            gamma: Discount factor (default: 1.0)
+
+        Returns:
+            G: A list of discounted returns for each trajectory
         """
+        if len(self.items) == 0:
+            return []
+
         n = len(self.items)
         G = [0.0] * n
 
