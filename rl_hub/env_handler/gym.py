@@ -1,18 +1,16 @@
 from typing import Any
 import gymnasium as gym
-from pydantic import BaseModel, ConfigDict
 
-from rl_hub.core.config import GymEnvConfig
+from rl_hub.core.config import EnvConfig
 from rl_hub.core.enums import RenderMode
+from rl_hub.env_handler import EnvHandler
 
 
-class GymEnvHandler(BaseModel):
+class GymEnvHandler(EnvHandler):
     """A Gym environment handler for working with [Gymnasium](https://gymnasium.farama.org/) environments."""
 
-    config: GymEnvConfig
+    config: EnvConfig
     env: gym.Env | None = None
-
-    model_config = ConfigDict(arbitrary_types_allowed=True)
 
     def model_post_init(self, __context: Any) -> None:
         self.env = (
@@ -24,9 +22,6 @@ class GymEnvHandler(BaseModel):
     def run_demo(
         self, episodes: int = 10, render_mode: RenderMode | None = RenderMode.HUMAN
     ) -> None:
-        """
-        Runs a demonstration of the environment with random actions. Strictly for initially exploring the environment and checking it is operating correctly.
-        """
         env = gym.make(self.config.ENV.NAME, render_mode=render_mode)
         self.__training_loop(env, episodes)
 
