@@ -2,7 +2,7 @@ from pathlib import Path
 from typing import Any
 import yaml
 
-from pydantic import BaseModel, ConfigDict, model_validator
+from pydantic import BaseModel, ConfigDict, model_validator, validate_call
 from pydantic_settings import BaseSettings
 
 from rl_hub.exc import IncorrectFileTypeError
@@ -35,16 +35,20 @@ class GymEnvConfig(BaseSettings):
         return convert_keys(values)
 
 
-def load_config(filename: Path | str) -> GymEnvConfig:
+@validate_call(validate_return=True)
+def load_config(filepath: Path | str) -> GymEnvConfig:
     """Loads a YAML file as a GymEnvConfig pydantic model."""
-    yaml_file = filename.split(".")[-1] == "yaml"
+    if not Path(filepath).exists():
+        raise FileNotFoundError("File does not exist.")
+
+    yaml_file = str(filepath).split(".")[-1] == "yaml"
 
     if not yaml_file:
         raise IncorrectFileTypeError(
             "Incorrect file type provided. Must be a 'yaml' file."
         )
 
-    with open(filename, "r") as f:
+    with open(filepath, "r") as f:
         yaml_config = yaml.safe_load(f)
 
     return GymEnvConfig(**yaml_config)
