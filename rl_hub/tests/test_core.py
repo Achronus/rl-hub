@@ -2,6 +2,7 @@ import pytest
 import numpy as np
 
 from rl_hub.core import History, Trajectory
+from rl_hub.core.enums import RenderMode
 
 
 class TestHistory:
@@ -105,4 +106,17 @@ class TestHistory:
         )
         G = history.returns(gamma=0.9)
         checks = [len(G) == 1, G[0] == 5]
+        assert all(checks)
+
+
+class TestEnums:
+    @staticmethod
+    def test_render_mode():
+        checks = [
+            RenderMode.HUMAN == "human",
+            RenderMode.RGB_ARRAY == "rgb_array",
+            RenderMode.ANSI == "ANSI",
+            RenderMode.RGB_ARRAY_LIST == "rgb_array_list",
+            RenderMode.ANSI_LIST == "ansi_list",
+        ]
         assert all(checks)
